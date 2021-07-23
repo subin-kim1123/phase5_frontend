@@ -27,7 +27,7 @@ export default class CategoryContainer extends Component {
                     </div>
                 </div>
                 <div>
-                    <h1></h1>
+                    <h1>Article</h1>
 
                 </div>
             </div>
