@@ -1,0 +1,102 @@
+.title {
+    font-family: 'Lucida Std';
+    display: flex;
+    margin-left: 30px;
+}
+
+.address {
+    width: '100%';
+    height: 170px;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.1)
+}
+
+.profilebtn {
+    border: none; 
+    background: none
+}
+
+.profileimg {
+    width:38px;
+    display: 'block'
+}
+
+.dot {
+    width: 45px; 
+    margin-right: 25px;
+}
+
+.circleimg {
+    width: 15px; 
+    margin-right: 12px
+}
+
+.enterlocation {
+    padding: 0px 10px;
+    border: 1.5px solid #00d563; 
+    color: #8e8e8e; 
+    border-radius: 4px; 
+    width: 300px; 
+    height: 34px;
+    margin-bottom: 30px; 
+    margin-right: 20px; 
+}
+
+.enterdestination {
+   padding: 0px 5px;
+   border: 1.5px solid #00d563; 
+   color: #8e8e8e; 
+   border-radius: 4px; 
+   width: 300px; 
+   height: 34px; 
+   margin-bottom: 20px;
+}
+
+.map1 {
+    width: 20px;
+    align-items: center; 
+    margin-right: 12px;
+}
+
+.form {
+    display: block;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: auto;
+    padding-right: 30px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 4px;
+    border: 1px solid #00d563;
+    
+}
+
+.dropdown-menu {
+    border-bottom: 1px solid #00d563;
+    font-family: 'Lucida Std';
+}
+
+.dropdown-menu1 {
+    font-family: 'Lucida Std';
+}
+
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+    right: 0;
+    margin-right: 35px;
+  }
+  
