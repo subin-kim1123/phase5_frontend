@@ -100,3 +100,18 @@
     margin-right: 35px;
   }
   
+  .header {
+    width: 100%; 
+    height: 170px; 
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.1); 
+    background-color: rgba(255, 255, 255,);
+  }
+
+  .categorybtn {
+    border: none; 
+    background: none;
+  }
+
+  .category .category-name {
+    font-family: 'Lucida Std';
+  }

@@ -6,6 +6,7 @@ import travel from './icon/travel.png'
 import business from './icon/business.png'
 import tech from './icon/tech.png'
 import sns from './icon/sns.png'
+import './style.css'
 
 export default class CategoryContainer extends Component {
     state = {
@@ -21,15 +22,15 @@ export default class CategoryContainer extends Component {
     render() {
         return (
             <div>
-                <div style={{width: '100%', height: '170px', boxShadow: "10px 5px 5px rgba(0, 0, 0, 0.1)", backgroundColor: "rgba(255, 255, 255,)"}}>
+                <div className="header">
                     <h2 style={{fontFamily: 'Lucida Std'}}>Commute Better</h2>
                     <div className='category'>
-                        <label style={{fontFamily: 'Lucida Std'}}>Money<button onClick={(e)=>this.handleClick('Money')} style={{border: 'none', background: 'none'}}><img src={money} alt="Money" style={{width: '75px'}}/></button></label>
-                        <label style={{fontFamily: 'Lucida Std'}}>Film<button onClick={(e)=>this.handleClick('Film')}style={{border: 'none', background: 'none'}}><img src={film} alt="Film" style={{width: '75px'}}/></button></label>
-                        <label style={{fontFamily: 'Lucida Std'}}>Travel<button style={{border: 'none', background: 'none'}}><img src={travel} alt="Travel" style={{width: '75px'}}/></button></label>
-                        <label style={{fontFamily: 'Lucida Std'}}>Tech<button style={{border: 'none', background: 'none'}}><img src={tech} alt="Technology" style={{width: '75px'}}/></button></label>
-                        <label style={{fontFamily: 'Lucida Std'}}>Social Media<button style={{border: 'none', background: 'none'}}><img src={sns} alt="SNS" style={{width: '75px'}}/></button></label>
-                        <label style={{fontFamily: 'Lucida Std'}}>Business<button style={{border: 'none', background: 'none'}}><img src={business} alt="Business" style={{width: '75px'}}/></button></label>
+                        <button className = "categorybtn" onClick={(e)=>this.handleClick('Money')}><img src={money} alt="Money" style={{width: '75px'}}/><div><label className="category-name">Money</label></div></button>
+                        <button className = "categorybtn" onClick={(e)=>this.handleClick('Film')}><img src={film} alt="Film" style={{width: '75px'}}/><div><label className="category-name">Film</label></div></button>
+                        <button className = "categorybtn" onClick={(e)=>this.handleClick('Travel')}><img src={travel} alt="Travel" style={{width: '75px'}}/><div><label className="category-name">Travel</label></div></button>
+                        <button className = "categorybtn" onClick={(e)=>this.handleClick('Tech')}><img src={tech} alt="Technology" style={{width: '75px'}}/><div><label className="category-name">Tech</label></div></button>
+                        <button className = "categorybtn" onClick={(e)=>this.handleClick('Social Media')}><img src={sns} alt="SNS" style={{width: '75px'}}/><div><label className="category-name">Social Media</label></div></button>
+                        <button className = "categorybtn" onClick={(e)=>this.handleClick('Business')}><img src={business} alt="Business" style={{width: '75px'}}/><div><label className="category-name">Business</label></div></button>
                     </div>
                 </div>
                 <div>
