@@ -1,16 +1,28 @@
-import React, { Component } from 'react'
+import React, { Component, useRef } from 'react'
 import Button from '@material-ui/core/Button'
 import Dot from './icon/dot.png'
 import Map1 from './icon/map.png'
 import Circle from './icon/circle.png'
 import Profile from './icon/profile.png'
 import './style.css'
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import GoogleMapReact from 'google-map-react';
+import Popup from 'reactjs-popup';
+import Geocode from "react-geocode";
 
-class AddressInput extends Component {
+
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const defaultProps = {
+    center: {
+      lat: 47.444,
+      lng: -122.176
+    },
+    zoom: 11
+  };
+
+export default class AddressInput extends Component {
     state={
-        startingPoint: '',
-        destination: '',
+        startingPoint: 'begin',
+        destination: 'end',
         profileMenu: ''
     }
 
@@ -20,11 +32,28 @@ class AddressInput extends Component {
         })
     }
 
+    latLngArray = [];
+
+    onClick = ({x, y, lat, lng, event}) => {
+        // console.log(x, y, lat, lng, event)
+        // console.log(window.google.maps.geometry.spherical.computeDistanceBetween)
+
+        const google = window.google;
+
+        this.latLngArray.push(new google.maps.LatLng({lat, lng}))
+
+        if (this.latLngArray.length == 2) {
+            const result = google.maps.geometry.spherical.computeDistanceBetween(this.latLngArray[0], this.latLngArray[1]);
+            console.log(result)
+        }
+
+        console.log(lat, lng)
+    }
+
+
+
     render() {
-        const mapStyles = {
-            width: '100%',
-            height: '100%',
-          };
+       
         return (
             <div>
                 <div className="address">
@@ -33,8 +62,10 @@ class AddressInput extends Component {
                             <div className = "dropdown">
                                 <button className= "profilebtn"><img className= "profileimg" src={Profile} alt="Profile"/>
                                     <div className = "dropdown-content">
-                                        <a className = "dropdown-menu" href = "#">My Article</a>
-                                        <a className = "dropdown-menu1" href = "#">Log Out</a>
+                                        
+                                        {/* <a className = "dropdown-menu1" href = "#">Log out</a> */}
+                                        <Button id="my-article" type='primary' className="dropdown-manu">My article</Button>
+                                        <Button id='logout' type="primary" className="dropdown-menu1" onClick={this.props.logOut}>Log out</Button>
                                     </div>
                                 </button>
                             </div>
@@ -45,31 +76,39 @@ class AddressInput extends Component {
 
                     <form className = "form" onSubmit={this.handleSubmit} >
                         <div>
-                            <label style={{color: '#00d563', textAlign: 'center', display: 'inline-block'}}><div>Enter your location</div><div><img className= "circleimg" src={Circle} alt="Circle"/><input className = "enterlocation" type ='text' name='startingPoint' id='startingPoint' value={this.state.username} onChange={this.handleChange} placeholder='Starting point'/></div></label>
+                            <label style={{color: '#00d563', textAlign: 'center', display: 'inline-block'}}><div>Enter your location</div><div><img className= "circleimg" src={Circle} alt="Circle"/><input className = "enterlocation" type ='text' name='startingPoint' id='startingPoint' value={this.state.startingPoint} placeholder='Starting point'/></div></label>
 
                             <label 
                             style={{display: 'inline-block', color: '#00d563', textAlign: 'center'}}><div>Enter destination</div>
-                            <div><img className="dot" src={Dot} alt="Dot"/><img className="map1" src={Map1} alt="Map"/><input className="enterdestination" type ='text' name='destination' id='destination' value={this.state.username} onChange={this.handleChange} placeholder='Destination'/></div>
+                            <div><img className="dot" src={Dot} alt="Dot"/><img className="map1" src={Map1} alt="Map"/><input className="enterdestination" type ='text' name='destination' id='destination' value={this.state.destination}  placeholder='Destination'/></div>
                             </label>
-
-                            <Button type='submit' style={{color:'white', backgroundColor: '#1a1617', fontFamily: 'Lucida Std', textTransform: 'none', width: '100px', marginLeft: '20px'}}>Save</Button>
+                            <Popup trigger={<Button style={{color:'white', backgroundColor: '#1a1617', fontFamily: 'Lucida Std', textTransform: 'none', width: '100px', marginLeft: '20px'}}>Save</Button>}>
+                                <div>
+                                    <h2>This is popup</h2>
+                                </div>
+                            </Popup>
                         </div>
                     </form>
                     <div>
-                    <Map
+                    {/* <Map
                         google={this.props.google}
                         zoom={8}
                         style={mapStyles}
                         initialCenter={{ lat: 47.444, lng: -122.176}}
-                    />
-                </div>
+                    /> */}
+                            <div style={{ height: '100vh', width: '100%' }}>
+                                <GoogleMapReact
+                                    bootstrapURLKeys={{ key: "" }}
+                                    defaultCenter={defaultProps.center}
+                                    defaultZoom={defaultProps.zoom}
+                                    onClick={(e) => {this.onClick(e)}}>
+                                </GoogleMapReact>
+                            </div>       
+        
+                    </div>
                 </div>
                 
             </div>
         )
     }
 }
-
-export default GoogleApiWrapper({
-    apiKey: 'AIzaSyDPT5H99VpEJEJUq2OD0F9QYJ5cqmMreXA'
-  })(AddressInput);

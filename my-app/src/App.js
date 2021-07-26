@@ -1,6 +1,6 @@
 import './App.css';
 import React, { Component } from 'react'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, withRouter} from 'react-router-dom';
 // import { Route, Switch, withRouter } from 'react-router-dom'
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
@@ -17,28 +17,59 @@ class App extends Component {
     categories: []
   }
 
-  login = () => {
-
+  login = (userInfo) => {
+    console.log(userInfo)
+    if (userInfo.token) {
+      this.setState({
+        id: userInfo.user.id,
+        username: userInfo.user.username,
+        token: userInfo.token
+      })
+      localStorage.token = userInfo.token
+      //console.log(this.props.history)
+      if (this.props.history.location.pathname === '/login') {
+        this.props.history.push('/address')
+      }
+    }else {
+      alert(userInfo.errors)
+    }
   }
+
+  logOut = () => {
+    this.setState({
+      username: "",
+      pantries: [],
+      token: "",
+      id: 0
+    })
+    localStorage.clear()
+    this.props.history.push('/login')
+  }
+
   render(){
   return (
-    <Router>
+    
       <div className="App">
         <Switch>
           {/* <Route path="/" exact component={Home}/> */}
-          <Route path="/Login" component={SignIn}/>
-          <Route path="/SignUp" component={SignUp}/>
-          <Route path="/Address" component={AddressInput}/>
-          <Route path="/Article">
+          <Route path="/login">
+            <SignIn login={this.login}/>
+          </Route>
+          <Route path="/signUp">
+            <SignUp login={this.login}/>
+          </Route>
+          <Route path="/address">
+            <AddressInput logOut={this.logOut}/>
+          </Route>
+          <Route path="/article">
             <CategoryContainer categories={this.state.categories}/>
           </Route>
-
         </Switch>
       </div>
-    </Router>
+    
   );
   }
 }
 
 
-export default App;
+export default withRouter(App);

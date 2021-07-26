@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 
 
@@ -20,7 +20,7 @@ class SignIn extends Component {
         e.preventDefault()
         const {username, password} = this.state
         const loginInfo = {username: username, password: password}
-        fetch('/login', {
+        fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {"Content-type":"application/json"},
             body: JSON.stringify(loginInfo)
@@ -36,7 +36,6 @@ class SignIn extends Component {
     
     render() {
         // console.log(this.state)
-        // const classes = this.useStyles();
 
         return (
             <div style={{justifyContent: 'center'}}>
@@ -52,4 +51,4 @@ class SignIn extends Component {
         )
     }
 }
-export default SignIn
+export default withRouter(SignIn)
