@@ -42,7 +42,7 @@ export default class AddressInput extends Component {
 
         const google = window.google;
 
-        Geocode.setApiKey("AIzaSyDPT5H99VpEJEJUq2OD0F9QYJ5cqmMreXA")
+        Geocode.setApiKey("")
 
         
 
@@ -134,7 +134,7 @@ export default class AddressInput extends Component {
                     /> */}
                             <div style={{ height: '100vh', width: '100%' }}>
                                 <GoogleMapReact
-                                    bootstrapURLKeys={{ key: "AIzaSyDPT5H99VpEJEJUq2OD0F9QYJ5cqmMreXA" }}
+                                    bootstrapURLKeys={{ key: "" }}
                                     defaultCenter={defaultProps.center}
                                     defaultZoom={defaultProps.zoom}
                                     onClick={(e) => {this.onClick(e)}}>

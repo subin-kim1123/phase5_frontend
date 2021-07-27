@@ -7,6 +7,7 @@ import business from './icon/business.png'
 import tech from './icon/tech.png'
 import sns from './icon/sns.png'
 import Profile from './icon/profile.png'
+import Button from '@material-ui/core/Button'
 import './style.css'
 
 export default class CategoryContainer extends Component {
@@ -28,8 +29,10 @@ export default class CategoryContainer extends Component {
                             <div className = "dropdown">
                                 <button className= "profilebtn"><img className= "profileimg" src={Profile} alt="Profile"/>
                                     <div className = "dropdown-content">
-                                        <a className = "dropdown-menu" href = "#">My Article</a>
-                                        <a className = "dropdown-menu1" href = "#">Log out</a>
+                                        
+                                        {/* <a className = "dropdown-menu1" href = "#">Log out</a> */}
+                                        <Button id="my-article" type='primary' className="dropdown-manu">My article</Button>
+                                        <Button id='logout' type="primary" className="dropdown-menu1" onClick={this.props.logOut}>Log out</Button>
                                     </div>
                                 </button>
                             </div>

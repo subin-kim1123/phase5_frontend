@@ -62,7 +62,7 @@ class App extends Component {
             <AddressInput logOut={this.logOut}/>
           </Route>
           <Route path="/article">
-            <CategoryContainer categories={this.state.categories}/>
+            <CategoryContainer categories={this.state.categories} logOut={this.logOut}/>
           </Route>
         </Switch>
       </div>
