@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom'
 
 function SignUp(props) {
 
@@ -23,7 +24,7 @@ function SignUp(props) {
         event.preventDefault()
         const {username, password} = formData
         const userData = {username: username, password: password}
-        fetch('/users', {
+        fetch('http://localhost:3000/users', {
             method: 'POST',
             headers: {"Content-type":"application/json"},
             body: JSON.stringify(userData)
@@ -45,6 +46,7 @@ function SignUp(props) {
                 <input style={{padding: '0px 15px',border: '1.5px solid #00d563', color: '#8e8e8e', borderRadius: '4px', width: '25%', height: '40px', marginBottom: '20px'}} type ='password' name='password' id='password' value={formData.password} onChange={handleChange} placeholder='Password'/><br/>
                 {/* <input style={{padding: '0px 15px',border: '1.5px solid #00d563', color: '#8e8e8e', borderRadius: '4px', width: '25%', height: '40px'}} type ='password' name='password' id='password' value={this.state.password} onChange={this.handleChange} placeholder='Confirm Password'/><br/> */}
                 <Button type='submit'style={{color:'white', backgroundColor: '#1a1617', fontFamily: 'Lucida Std', textTransform: 'none', width: '200px', marginTop: '20px'}}>Sign Up</Button>
+                <Link to='/login' style={{textDecoration: 'none'}}><p style={{color: '#00d563'}}>Back</p></Link>
                 </form>
             </div>
         )

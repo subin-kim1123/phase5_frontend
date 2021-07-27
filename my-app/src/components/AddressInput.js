@@ -19,6 +19,8 @@ const defaultProps = {
     zoom: 11
   };
 
+
+
 export default class AddressInput extends Component {
     state={
         startingPoint: 'begin',
@@ -40,17 +42,44 @@ export default class AddressInput extends Component {
 
         const google = window.google;
 
+        Geocode.setApiKey("AIzaSyDPT5H99VpEJEJUq2OD0F9QYJ5cqmMreXA")
+
+        
+
         this.latLngArray.push(new google.maps.LatLng({lat, lng}))
 
-        if (this.latLngArray.length == 2) {
+        if(this.latLngArray.length == 1) {
+            Geocode.fromLatLng(lat, lng).then(
+                (response) => {
+                const address = response.results[0].formatted_address;
+                
+                    this.setState({
+                        startingPoint: address
+                    })   
+                },
+                (error) => {
+                console.error(error);
+                }
+            )
+        }else {
+            Geocode.fromLatLng(lat, lng).then(
+                (response) => {
+                const address = response.results[0].formatted_address;   
+                    this.setState({
+                        destination: address
+                    })   
+                },
+                (error) => {
+                console.error(error);
+                }
+            )
             const result = google.maps.geometry.spherical.computeDistanceBetween(this.latLngArray[0], this.latLngArray[1]);
             console.log(result)
         }
-
-        console.log(lat, lng)
+        console.log(lat, lng)  
     }
 
-
+    
 
     render() {
        
@@ -83,9 +112,16 @@ export default class AddressInput extends Component {
                             <div><img className="dot" src={Dot} alt="Dot"/><img className="map1" src={Map1} alt="Map"/><input className="enterdestination" type ='text' name='destination' id='destination' value={this.state.destination}  placeholder='Destination'/></div>
                             </label>
                             <Popup trigger={<Button style={{color:'white', backgroundColor: '#1a1617', fontFamily: 'Lucida Std', textTransform: 'none', width: '100px', marginLeft: '20px'}}>Save</Button>}>
-                                <div>
-                                    <h2>This is popup</h2>
+                            <div className = "popup">
+                                <div classNmae = "popup-inner">
+                                    <div>Starting Point: {this.state.startingPoint}</div>
+                                    <div>Destination: {this.state.destination}</div>
+                                    <div>Distance: {this.result}</div>
+                                    <Button>Cancel</Button>
+                                    <Button>Confirm</Button>
+                                    
                                 </div>
+                            </div>
                             </Popup>
                         </div>
                     </form>
@@ -98,7 +134,7 @@ export default class AddressInput extends Component {
                     /> */}
                             <div style={{ height: '100vh', width: '100%' }}>
                                 <GoogleMapReact
-                                    bootstrapURLKeys={{ key: "" }}
+                                    bootstrapURLKeys={{ key: "AIzaSyDPT5H99VpEJEJUq2OD0F9QYJ5cqmMreXA" }}
                                     defaultCenter={defaultProps.center}
                                     defaultZoom={defaultProps.zoom}
                                     onClick={(e) => {this.onClick(e)}}>

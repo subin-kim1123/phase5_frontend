@@ -55,7 +55,7 @@ class App extends Component {
           <Route path="/login">
             <SignIn login={this.login}/>
           </Route>
-          <Route path="/signUp">
+          <Route path="/signup">
             <SignUp login={this.login}/>
           </Route>
           <Route path="/address">
