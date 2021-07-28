@@ -8,6 +8,8 @@ import './style.css'
 import GoogleMapReact from 'google-map-react';
 import Popup from 'reactjs-popup';
 import Geocode from "react-geocode";
+import fetch from 'node-fetch';
+
 
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
@@ -42,9 +44,7 @@ export default class AddressInput extends Component {
 
         const google = window.google;
 
-        Geocode.setApiKey("")
-
-        
+        Geocode.setApiKey("AIzaSyDPT5H99VpEJEJUq2OD0F9QYJ5cqmMreXA")
 
         this.latLngArray.push(new google.maps.LatLng({lat, lng}))
 
@@ -52,10 +52,10 @@ export default class AddressInput extends Component {
             Geocode.fromLatLng(lat, lng).then(
                 (response) => {
                 const address = response.results[0].formatted_address;
-                
+
                     this.setState({
                         startingPoint: address
-                    })   
+                    })
                 },
                 (error) => {
                 console.error(error);
@@ -64,25 +64,35 @@ export default class AddressInput extends Component {
         }else {
             Geocode.fromLatLng(lat, lng).then(
                 (response) => {
-                const address = response.results[0].formatted_address;   
+                const address = response.results[0].formatted_address;
                     this.setState({
                         destination: address
-                    })   
+                    })
                 },
                 (error) => {
                 console.error(error);
                 }
             )
-            const result = google.maps.geometry.spherical.computeDistanceBetween(this.latLngArray[0], this.latLngArray[1]);
-            console.log(result)
+
+            const directionsService = new google.maps.DirectionsService();
+
+            directionsService
+              .route({
+                  origin: this.latLngArray[0],
+                  destination: this.latLngArray[1],
+                  travelMode: google.maps.TravelMode.TRANSIT,
+              })
+              .then((response) => {
+                // this.props.goToArticle(response.routes[0].legs[0].duration.value);
+                  
+              })
         }
-        console.log(lat, lng)  
     }
 
-    
+   
 
     render() {
-       
+
         return (
             <div>
                 <div className="address">
@@ -91,7 +101,7 @@ export default class AddressInput extends Component {
                             <div className = "dropdown">
                                 <button className= "profilebtn"><img className= "profileimg" src={Profile} alt="Profile"/>
                                     <div className = "dropdown-content">
-                                        
+
                                         {/* <a className = "dropdown-menu1" href = "#">Log out</a> */}
                                         <Button id="my-article" type='primary' className="dropdown-manu">My article</Button>
                                         <Button id='logout' type="primary" className="dropdown-menu1" onClick={this.props.logOut}>Log out</Button>
@@ -101,25 +111,27 @@ export default class AddressInput extends Component {
                         </h2>
                     </div>
 
-                        
+
 
                     <form className = "form" onSubmit={this.handleSubmit} >
                         <div>
                             <label style={{color: '#00d563', textAlign: 'center', display: 'inline-block'}}><div>Enter your location</div><div><img className= "circleimg" src={Circle} alt="Circle"/><input className = "enterlocation" type ='text' name='startingPoint' id='startingPoint' value={this.state.startingPoint} placeholder='Starting point'/></div></label>
 
-                            <label 
+                            <label
                             style={{display: 'inline-block', color: '#00d563', textAlign: 'center'}}><div>Enter destination</div>
                             <div><img className="dot" src={Dot} alt="Dot"/><img className="map1" src={Map1} alt="Map"/><input className="enterdestination" type ='text' name='destination' id='destination' value={this.state.destination}  placeholder='Destination'/></div>
                             </label>
-                            <Popup trigger={<Button style={{color:'white', backgroundColor: '#1a1617', fontFamily: 'Lucida Std', textTransform: 'none', width: '100px', marginLeft: '20px'}}>Save</Button>}>
+                            <Popup trigger={<Button style={{color:'white', backgroundColor: '#1a1617', fontFamily: 'LucidaStd-Bold', textTransform: 'none', width: '100px', marginLeft: '20px'}}>Save</Button>}>
                             <div className = "popup">
-                                <div classNmae = "popup-inner">
-                                    <div>Starting Point: {this.state.startingPoint}</div>
-                                    <div>Destination: {this.state.destination}</div>
-                                    <div>Distance: {this.result}</div>
+                                <div className = "popup-inner">
+                                    <div className='popup-title'>Starting Point:</div> <div className='popup-text'>{this.state.startingPoint}</div><br/>
+                                    <div className='popup-title'>Destination:</div> <div className='popup-text'> {this.state.destination}</div><br/>
+                                    <div className='popup-title'>Time:</div><div className='popup-text'></div><br/>
+                                    <div className="popup-btn">
                                     <Button>Cancel</Button>
-                                    <Button>Confirm</Button>
-                                    
+                                    <Button onClick={(e)=>{this.popupClick(e)}}>Confirm</Button>
+                                    </div>
+
                                 </div>
                             </div>
                             </Popup>
@@ -134,16 +146,16 @@ export default class AddressInput extends Component {
                     /> */}
                             <div style={{ height: '100vh', width: '100%' }}>
                                 <GoogleMapReact
-                                    bootstrapURLKeys={{ key: "" }}
+                                    bootstrapURLKeys={{ key: "AIzaSyDPT5H99VpEJEJUq2OD0F9QYJ5cqmMreXA" }}
                                     defaultCenter={defaultProps.center}
                                     defaultZoom={defaultProps.zoom}
                                     onClick={(e) => {this.onClick(e)}}>
                                 </GoogleMapReact>
-                            </div>       
-        
+                            </div>
+
                     </div>
                 </div>
-                
+
             </div>
         )
     }

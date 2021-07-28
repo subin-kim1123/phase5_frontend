@@ -6,6 +6,7 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import AddressInput from './components/AddressInput';
 import ArticleContainer from './components/ArticleContainer';
+import MyArticle from './components/MyArticle';
 import CategoryContainer from './components/CategoryContainer';
 
 class App extends Component {
@@ -16,6 +17,18 @@ class App extends Component {
     token: '',
     categories: []
   }
+
+  componentDidMount(){ 
+    fetch(`http://localhost:3000/category`)
+    .then((response)=> response.json())
+    .then((data)=> {
+        this.setState({
+            categories: data}) 
+        })
+    .catch(()=>{
+        console.log("error")
+    })
+}
 
   login = (userInfo) => {
     console.log(userInfo)
@@ -46,9 +59,14 @@ class App extends Component {
     this.props.history.push('/login')
   }
 
+
+  goToArticle = (value) => {
+    this.props.history.push('/category?duration=' + value)
+  }
+
   render(){
   return (
-    
+
       <div className="App">
         <Switch>
           {/* <Route path="/" exact component={Home}/> */}
@@ -59,14 +77,23 @@ class App extends Component {
             <SignUp login={this.login}/>
           </Route>
           <Route path="/address">
-            <AddressInput logOut={this.logOut}/>
+            <AddressInput logOut={this.logOut} goToArticle={this.goToArticle}/>
           </Route>
+          <Route path="/category">
+            <CategoryContainer logOut={this.logOut} categories={this.state.categories}/>
+            </Route>
+          {/* <Route path="/category">
+            <Category categories={this.state.categories} logOut={this.logOut}/>
+          </Route> */}
           <Route path="/article">
-            <CategoryContainer categories={this.state.categories} logOut={this.logOut}/>
+            <ArticleContainer/>
+          </Route>
+          <Route path="/myarticle">
+            <MyArticle/>
           </Route>
         </Switch>
       </div>
-    
+
   );
   }
 }

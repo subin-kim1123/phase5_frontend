@@ -8,20 +8,42 @@ import tech from './icon/tech.png'
 import sns from './icon/sns.png'
 import Profile from './icon/profile.png'
 import Button from '@material-ui/core/Button'
+import hodu from './icon/hodu.jpg'
 import './style.css'
+import { Link } from 'react-router-dom'
 
 export default class CategoryContainer extends Component {
     state = {
-        helloText: ''
+        category: ""
+    }
+
+    componentDidMount(){ 
+        fetch(`http://localhost:3000/category`)
+        .then((response)=> response.json())
+        .then((data)=> {
+            this.setState({
+                category: data}) 
+            })
+        .catch(()=>{
+            console.log("error")
+        })
     }
 
     handleClick = (category) => { 
         this.setState(()=>{
-            return {helloText: category}
+            return {category: category}
         })
     }
 
+    saveClick = (e) => {
+        console.log("hi")
+    }
+
     render() {
+        console.log(window.location.search.split('=')[1])
+        // const arrOfArticles = this.props.categories.map(articleObj=>{
+        //     return key={articleObj.id} articleObj={articleObj}
+        // })
         return (
             <div>
                 <div className="header">
@@ -47,9 +69,69 @@ export default class CategoryContainer extends Component {
                     </div>
                 </div>
                 <div>
-                    <h1>Article</h1>
-                    {this.state.helloText}
+                    {this.state.category}
+                    <Link to='/article'>
+                        <div style={{textAlign: 'left', marginLeft: '250px', marginRight: '250px', marginTop: '100px'}}>
+                    <div style={{fontFamily: 'Lucida Std' , display: 'inline-block'}}>
+                        <span>author</span>
+                        <h2>Article1</h2>
+                        <span>Description will be here</span><br/>
+                        <span>Time</span>   
+                    </div>
+                    <div className="img-container" style={{float: 'right', display: 'inline-block'}}>
+                        <img className="article-img" style={{width: '200px'}} src={hodu}/>
+                        <button className="savebtn" onClick={this.saveClick()}>Save</button>
+                    </div>
+                    </div>
+                    </Link>
 
+                    <Link to='/article'>
+                    <div style={{textAlign: 'left', marginLeft: '250px', marginRight: '250px', marginTop: '100px'}}>
+                    <div style={{fontFamily: 'Lucida Std' , display: 'inline-block'}}>
+                        <span>Author</span>
+                        <h2>Article2</h2>
+                        <span>Description will be here</span><br/>
+                        <span>Time</span>   
+                    </div>
+                    <div style={{float: 'right', display: 'inline-block'}}><img style={{width: '200px'}} src={hodu}/></div>
+                    </div>
+                    </Link>
+                    
+                    <Link to='/article'>
+                    <div style={{textAlign: 'left', marginLeft: '250px', marginRight: '250px', marginTop: '100px'}}>
+                    <div style={{fontFamily: 'Lucida Std', display: 'inline-block'}}>
+                        <span>Author</span>
+                        <h2>Article3</h2>
+                        <span>Description will be here</span><br/>
+                        <span>Time</span>   
+                    </div>
+                    <div style={{float: 'right', display: 'inline-block'}}><img style={{width: '200px'}} src={hodu}/></div>
+                    </div>
+                    </Link>
+
+                    <Link to='/article'>
+                    <div style={{textAlign: 'left', marginLeft: '250px', marginRight: '250px', marginTop: '100px'}}>
+                    <div style={{fontFamily: 'Lucida Std', display: 'inline-block'}}>
+                        <span>Author</span>
+                        <h2>Article4</h2>
+                        <span>Description will be here</span><br/>
+                        <span>Time</span>   
+                    </div>
+                    <div style={{float: 'right', display: 'inline-block'}}><img style={{width: '200px'}} src={hodu}/></div>
+                    </div>
+                    </Link>
+
+                    <Link to='/article'>
+                    <div style={{textAlign: 'left', marginLeft: '250px', marginRight: '250px', marginTop: '100px'}}>
+                    <div style={{fontFamily: 'Lucida Std', display: 'inline-block'}}>
+                        <span>Author</span>
+                        <h2>Article5</h2>
+                        <span>Description will be here</span><br/>
+                        <span>Time</span>   
+                    </div>
+                    <div style={{float: 'right', display: 'inline-block'}}><img style={{width: '200px'}} src={hodu}/></div>
+                    </div>
+                    </Link>
                 </div>
             </div>
         )

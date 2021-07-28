@@ -1,5 +1,5 @@
 .title {
-    font-family: 'Lucida Std';
+    font-family: 'LucidaStd-Bold';
     display: flex;
     margin-left: 30px;
 }
@@ -81,11 +81,11 @@
 
 .dropdown-menu {
     border-bottom: 1px solid #00d563;
-    font-family: 'Lucida Std';
+    font-family: 'LucidaStd-Bold';
 }
 
 .dropdown-menu1 {
-    font-family: 'Lucida Std';
+    font-family: 'LucidaStd-Bold ';
 }
 
 .dropdown-content a {
@@ -110,6 +110,12 @@
   .categorybtn {
     border: none; 
     background: none;
+    left: 10%;
+  }
+
+  .category {
+      left: 10%;
+      margin: 20px;
   }
 
   .category .category-name {
@@ -117,19 +123,34 @@
   }
 
   .popup {
-      position: fixed;
+      /* position:fixed;
+      margin: auto;
       top: 0;
       left: 0;
-      width: 100%;
+      width: 80%;
       height: 500px;
-      background-color: rgba(0,0,0,0.2);
+      background-color: rgba(255,255,255,1);
 
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: center; */
+    position: fixed;
+    padding: 70px;
+    left: 20%;
+    top: 15%;
+    width: 50%;
+    border: 1px solid #011627;
+    border-radius: 1em;
+    box-shadow: -2px 5px 5px #00d563;
+    background-color: #FDFFFC;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .popup-inner {
+      align-items: center;
       position: relative;
       padding: 32px;
       width:100%;
@@ -142,6 +163,18 @@
       top: 16px;
       right: 16px;
   }
+
+  .popup-text {
+      font-family: 'LucidaStd';
+  }
+
+  .popup-title {
+    font-family: 'LucidaStd-Bold';
+}
+
+.popup-btn {
+    padding-top: 100px;
+}
 
   .logoutbtn {
     font-family: 'Lucida Std';
