@@ -27,7 +27,8 @@ export default class AddressInput extends Component {
     state={
         startingPoint: 'begin',
         destination: 'end',
-        profileMenu: ''
+        profileMenu: '',
+        duration: 0
     }
 
     handleClick = (menu) => {
@@ -44,7 +45,7 @@ export default class AddressInput extends Component {
 
         const google = window.google;
 
-        Geocode.setApiKey("AIzaSyDPT5H99VpEJEJUq2OD0F9QYJ5cqmMreXA")
+        Geocode.setApiKey("")
 
         this.latLngArray.push(new google.maps.LatLng({lat, lng}))
 
@@ -83,12 +84,18 @@ export default class AddressInput extends Component {
                   travelMode: google.maps.TravelMode.TRANSIT,
               })
               .then((response) => {
+                  this.setState({
+                    duration: response.routes[0].legs[0].duration.value
+                  })
                 // this.props.goToArticle(response.routes[0].legs[0].duration.value);
                   
               })
         }
     }
 
+    popupClick = (e) => {
+        this.props.goToArticle((this.state.duration/60).toFixed(0))
+    }
    
 
     render() {
@@ -126,7 +133,7 @@ export default class AddressInput extends Component {
                                 <div className = "popup-inner">
                                     <div className='popup-title'>Starting Point:</div> <div className='popup-text'>{this.state.startingPoint}</div><br/>
                                     <div className='popup-title'>Destination:</div> <div className='popup-text'> {this.state.destination}</div><br/>
-                                    <div className='popup-title'>Time:</div><div className='popup-text'></div><br/>
+                                    <div className='popup-title'>Time:</div><div className='popup-text'>{(this.state.duration/60).toFixed(0)}min</div><br/>
                                     <div className="popup-btn">
                                     <Button>Cancel</Button>
                                     <Button onClick={(e)=>{this.popupClick(e)}}>Confirm</Button>
@@ -146,7 +153,7 @@ export default class AddressInput extends Component {
                     /> */}
                             <div style={{ height: '100vh', width: '100%' }}>
                                 <GoogleMapReact
-                                    bootstrapURLKeys={{ key: "AIzaSyDPT5H99VpEJEJUq2OD0F9QYJ5cqmMreXA" }}
+                                    bootstrapURLKeys={{ key: "" }}
                                     defaultCenter={defaultProps.center}
                                     defaultZoom={defaultProps.zoom}
                                     onClick={(e) => {this.onClick(e)}}>

@@ -45,7 +45,7 @@ function SignUp(props) {
                 <input style={{padding: '0px 15px',border: '1.5px solid #00d563', color: '#8e8e8e', borderRadius: '4px', width: '25%', height: '40px', marginBottom: '20px'}} type ='text' name='username' id='username' value={formData.username} onChange={handleChange} placeholder='Email account'/><br/>
                 <input style={{padding: '0px 15px',border: '1.5px solid #00d563', color: '#8e8e8e', borderRadius: '4px', width: '25%', height: '40px', marginBottom: '20px'}} type ='password' name='password' id='password' value={formData.password} onChange={handleChange} placeholder='Password'/><br/>
                 {/* <input style={{padding: '0px 15px',border: '1.5px solid #00d563', color: '#8e8e8e', borderRadius: '4px', width: '25%', height: '40px'}} type ='password' name='password' id='password' value={this.state.password} onChange={this.handleChange} placeholder='Confirm Password'/><br/> */}
-                <Button type='submit'style={{color:'white', backgroundColor: '#1a1617', fontFamily: 'Lucida Std', textTransform: 'none', width: '200px', marginTop: '20px'}}>Sign Up</Button>
+                <Button type='submit'style={{color:'white', backgroundColor: '#1a1617', fontFamily: 'LucidaStd-bold', textTransform: 'none', width: '200px', marginTop: '20px'}}>Sign Up</Button>
                 <Link to='/login' style={{textDecoration: 'none'}}><p style={{color: '#00d563'}}>Back</p></Link>
                 </form>
             </div>

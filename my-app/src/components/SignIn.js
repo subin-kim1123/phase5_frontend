@@ -45,7 +45,7 @@ class SignIn extends Component {
                 <form onSubmit={this.handleSubmit} style={{display:'block'}}>
                 <input style={{padding: '0px 15px',border: '1.5px solid #00d563', color: '#8e8e8e', borderRadius: '4px', width: '25%', height: '40px', marginBottom: '20px'}} type ='text' name='username' id='username' value={this.state.username} onChange={this.handleChange} placeholder='Email account'/><br/>
                 <input style={{padding: '0px 15px',border: '1.5px solid #00d563', color: '#8e8e8e', borderRadius: '4px', width: '25%', height: '40px'}} type ='password' name='password' id='password' value={this.state.password} onChange={this.handleChange} placeholder='Password'/><br/>
-                <Button type='submit'style={{color:'white', backgroundColor: '#1a1617', fontFamily: 'Lucida Std', textTransform: 'none', width: '200px', marginTop: '20px'}}>Login</Button>
+                <Button type='submit'style={{color:'white', backgroundColor: '#1a1617', fontFamily: 'LucidaStd-bold', textTransform: 'none', width: '200px', marginTop: '20px'}}>Login</Button>
                 {/* <p>Do not have account yet?</p> */}
                 <Link to='/signup' style={{textDecoration: 'none'}}><p style={{color: '#00d563'}}>Sign up</p></Link>
                 </form>

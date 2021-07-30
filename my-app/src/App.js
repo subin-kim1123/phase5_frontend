@@ -6,8 +6,9 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import AddressInput from './components/AddressInput';
 import ArticleContainer from './components/ArticleContainer';
-import MyArticle from './components/MyArticle';
+import MyArticleContainer from './components/MyArticleContainer';
 import CategoryContainer from './components/CategoryContainer';
+import Home from './components/Home';
 
 class App extends Component {
 
@@ -15,20 +16,28 @@ class App extends Component {
     id: 0,
     username: '',
     token: '',
-    categories: []
+    my_articles: []
   }
 
-  componentDidMount(){ 
-    fetch(`http://localhost:3000/category`)
-    .then((response)=> response.json())
-    .then((data)=> {
-        this.setState({
-            categories: data}) 
+  componentDidMount(){
+    if(localStorage.token){
+
+      fetch("http://localhost:3000/me", {
+        headers: {
+          "Authorization": localStorage.token
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          // console.log(data)
+          this.setState({
+            id: data.user.id,
+            my_articles: data.user.my_articles
+          })
         })
-    .catch(()=>{
-        console.log("error")
-    })
-}
+
+    }
+  }
 
   login = (userInfo) => {
     console.log(userInfo)
@@ -36,7 +45,8 @@ class App extends Component {
       this.setState({
         id: userInfo.user.id,
         username: userInfo.user.username,
-        token: userInfo.token
+        token: userInfo.token,
+        my_articles: userInfo.user.my_articles
       })
       localStorage.token = userInfo.token
       //console.log(this.props.history)
@@ -59,12 +69,34 @@ class App extends Component {
     this.props.history.push('/login')
   }
 
+  addMyArticles = (data) => {
+    this.setState({
+      my_articles: [...this.state.my_articles, data.id]
+    })
+  } 
+
+  delMyArticle = (response) => {
+    const newMyArticlesArray = this.state.my_articles.filter(my_articles => my_articles.id !== response.id)
+    this.setState({
+      my_articles: newMyArticlesArray
+    })
+  }
+
+  deleteMyArticles = (deleteID) => {
+    let newArr = this.state.my_articles.filter(myArticleObj => {
+        return myArticleObj.id !== deleteID
+    })
+    this.setState({
+        my_articles: newArr
+    })
+}
 
   goToArticle = (value) => {
     this.props.history.push('/category?duration=' + value)
   }
 
   render(){
+    
   return (
 
       <div className="App">
@@ -80,16 +112,19 @@ class App extends Component {
             <AddressInput logOut={this.logOut} goToArticle={this.goToArticle}/>
           </Route>
           <Route path="/category">
-            <CategoryContainer logOut={this.logOut} categories={this.state.categories}/>
+            <CategoryContainer addMyArticles={this.addMyArticles} userId={this.state.id} logOut={this.logOut} token={this.state.token} my_articles={this.state.my_articles}/>
             </Route>
           {/* <Route path="/category">
             <Category categories={this.state.categories} logOut={this.logOut}/>
           </Route> */}
-          <Route path="/article">
-            <ArticleContainer/>
+          <Route path="/articles">
+            <ArticleContainer addMyArticles={this.addMyArticles} userId={this.state.id} token={this.state.token} logOut={this.logOut}/>
           </Route>
           <Route path="/myarticle">
-            <MyArticle/>
+            <MyArticleContainer my_articles={this.state.my_articles} deleteMyArticles={this.deleteMyArticles} logOut={this.logOut}/>
+          </Route>
+          <Route exact path="/">
+            <Home />
           </Route>
         </Switch>
       </div>
