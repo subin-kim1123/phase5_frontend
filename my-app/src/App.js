@@ -71,16 +71,9 @@ class App extends Component {
 
   addMyArticles = (data) => {
     this.setState({
-      my_articles: [...this.state.my_articles, data.id]
+      my_articles: [...this.state.my_articles, data]
     })
   } 
-
-  delMyArticle = (response) => {
-    const newMyArticlesArray = this.state.my_articles.filter(my_articles => my_articles.id !== response.id)
-    this.setState({
-      my_articles: newMyArticlesArray
-    })
-  }
 
   deleteMyArticles = (deleteID) => {
     let newArr = this.state.my_articles.filter(myArticleObj => {

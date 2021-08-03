@@ -10,21 +10,12 @@ export default class ArticleContainer extends Component {
         title: '',
         author: '',
         time: '',
-        content: ''
+        image: '',
+        content: '',
+        isSaved: false
 
     }
-    // handleClick = (e) => {
-    //     fetch('http://localhost:3000/my_articles', {
-    //         method: 'POST',
-    //         headers: {"Content-type":"application/json"},
-    //         body: JSON.stringify()
-    //     })
-    //     .then(res => res.json())
-    //     .then(my_articles => {
-    //         console.log(my_articles)
-    //     })
-
-    // }
+ 
     componentDidMount=()=> {
         const article_num= window.location.pathname.split("/")[2]
         console.log(article_num)
@@ -36,12 +27,56 @@ export default class ArticleContainer extends Component {
                 title: articleObj.title,
                 author: articleObj.author,
                 time: articleObj.time,
+                image: articleObj.image,
                 content: articleObj.content
             })
-        });
+            
+        }); 
+            if(localStorage.token){
+        
+              fetch("http://localhost:3000/me", {
+                headers: {
+                  "Authorization": localStorage.token
+                }
+              })
+                .then(res => res.json())
+                .then(data => {
+                //   // console.log(data)
+                //   this.setState({
+                //     id: data.user.id,
+                //     my_articles: data.user.my_articles
+                        const result = data.user.my_articles.filter(my_article => {
+                            return my_article.article.id == article_num
+                        })
+                        console.log(result)
+                        this.setState({
+                            isSaved: result.length>0
+                        })
+                        console.log(this.state.isSaved)
+                //   })
+                })
+          }
     }
 
+    // componentWillUpdate = () => {
+    //     const article_num= window.location.pathname.split("/")[2]
+    //     if(this.props.my_articles.length>0) {
+    //         const result = this.props.my_articles.filter(my_article => {
+    //             return my_article.article.id == article_num
+    //         })
+    //         console.log(result)
+    //         this.setState({
+    //             isSaved: result.length>0
+    //         })
+    //     }
+    //     console.log(this.state.isSaved)
+    // }
+
     saveClick = () => {
+        this.setState((currentState) => ({
+            isSaved: !currentState.isSaved, 
+        }));
+
         fetch(`http://localhost:3000/my_articles`, {
             method: 'POST',
             headers: {"Content-type":"application/json", authorization: this.props.token},
@@ -74,16 +109,22 @@ export default class ArticleContainer extends Component {
                                 </button>
                             </div>
                     </h2>      
-            <div> 
-                <h1 style={{fontFamily: 'LucidaStd-bold'}}>{this.state.title}</h1>
+            <div style={
+                {marginBottom: '20px'}
+            }> 
+                <h1 style={{marginBottom: '20px', fontFamily: 'LucidaStd-bold'}}>{this.state.title}</h1>
+                <img className="article-image" style={{width: '1000px', height: '630px', marginBottom: '20px'}} src={this.state.image}/><br/>
                 <span style={{fontFamily: 'LucidaStd'}}>{this.state.author}</span><br/>
                 <span style={{fontFamily: 'LucidaStd'}}>{this.state.time} min</span><br/> 
-                <div style={{fontFamily:'Lucida Std' ,lineHeight: '180%', marginLeft: '320px', marginRight: '320px', marginTop: '100px', fontSize: '20px'}}>
-                <button onClick={this.saveClick}>Save</button><br/>
+                
+                <div style={{fontFamily:'Lucida Std' ,lineHeight: '180%', marginLeft: '320px', marginRight: '320px', fontSize: '20px'}}>
+                <button className= "toggle-btn" style={{marginBottom: '50px',color: '#fff' , backgroundColor: '#000000', width: '70px', height:'30px', borderRadius: '20px', boxShadow: 'initial'}} onClick={this.saveClick}>{this.state.isSaved? '❤️' : 'Save'}</button><br/>
                 <span>{this.state.content}</span><br/>
                 </div>
-                    <button>Back</button>
+                <div style={{paddingTop: '20px', paddingBottom: '150px'}}>
+                    <button style={{marginRight: '10px'}}>Back</button>
                     <button>Next</button><br/>
+                </div>
                 </div>
             </div>  
         )

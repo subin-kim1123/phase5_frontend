@@ -39,7 +39,7 @@ class SignIn extends Component {
         // console.log(this.state)
 
         return (
-            <div style={{justifyContent: 'center'}}>
+            <div style={{width: '100%', height: '100%', paddingTop: '230px'}}>
                 <h1 style={{fontFamily: 'Lucida Std'}}>Commute Better</h1>
                 <h3 style={{fontFamily: 'Lucida Std', color: '#00d563', marginRight: '280px'}}>Welcome back!</h3>
                 <form onSubmit={this.handleSubmit} style={{display:'block'}}>

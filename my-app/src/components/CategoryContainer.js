@@ -15,13 +15,14 @@ import { Link } from 'react-router-dom'
 const moneyId = 1
 const filmId = 2
 const travelId  = 3
-const educationId = 4
+const techId = 4
+const educationId = 10
 const socialMediaId = 5
-const creativityId = 6
-const businessId = 7
+const creativityId = 7
+const businessId = 6
 const designId = 8
 const humorId = 9
-const techId = 10
+
 const futureId= 11
 
 export default class CategoryContainer extends Component {
@@ -29,23 +30,33 @@ export default class CategoryContainer extends Component {
         category: null,
         saved: false,
         article_id: 0
-    }
 
+    }
+    duration = 0
     componentDidMount(){ 
-        this.handleClick(moneyId)
+        this.handleClick(moneyId) 
     }
 
     handleClick = (category) => { 
+        this.duration = window.location.search.split('=')[1]
         fetch(`http://localhost:3000/categories/${category}`)
         .then((response)=> response.json())
         .then((data)=> {
+            const articles = []
+            data.articles.forEach(element => {
+               this.duration = this.duration-element.time
+               if(this.duration>0){
+                articles.push(element)
+               }
+            });
+            data.articles = articles
             this.setState({
                 category: data
-            }) 
-            console.log(this.state.category)
             })
-        .catch(()=>{
-            console.log("error")
+            console.log(articles)
+            })
+        .catch((error)=>{
+            console.log(error)
         }) 
     }
 
@@ -66,9 +77,6 @@ export default class CategoryContainer extends Component {
         )
     }
 
-    // articleClick = () => {
-    //     console.log("hello")
-    // }
 
     render() {
         console.log(window.location.search.split('=')[1])
@@ -104,20 +112,20 @@ export default class CategoryContainer extends Component {
                         <div style={{textAlign: 'left', marginLeft: '250px', marginRight: '250px', marginTop: '100px'}}>
                             <div style={{color: '#000000',fontFamily: 'Lucida Std' , display: 'inline-block'}}>
                             <Link to={`/articles/${article.id}` }>
-                                <span className="article-author">{article.author}</span>
-                                <h2 className="article-title">{article.title}</h2>
-                                <span className="article-description">Description will be here</span><br/>
+                                <span className="article-author">{article.author}</span><br/>
+                                <h2 className="article-title">{article.title}</h2><br/>
+                                <span maxlength= "20" className="article-description">{article.description}</span><br/>
                                 <span className="article-time">{article.time}min</span> 
                             </Link>  
                             </div>
                             <div className="img-container" style={{float: 'right', display: 'inline-block'}}>
                                 <div>
-                                <img className="article-img" style={{width: '200px'}} src={hodu}/>
+                                <img className="article-img" style={{position: 'relative', width: '250px', height: '150px'}} src={article.image}/>
                                 <button onClick={(e)=>{
                                     // e.preventDefault();
                                     this.saveClick(article.id)
                                 }
-                                    } className="save-btn">Save</button>
+                                    } className="save-btn" style={{position: 'absolute'}}>Save</button>
                                 </div>
                             </div>
                         </div>

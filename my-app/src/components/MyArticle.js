@@ -22,47 +22,27 @@ export default class MyArticle extends Component {
     render() {
         return (
                 <div>
-                <div className="header1">
-                    <h2 className="title">Commute Better
-                            <div className = "dropdown">
-                                <button className= "profilebtn"><img className= "profileimg" src={Profile} alt="Profile"/>
-                                    <div className = "dropdown-content">
-                                        
-                                        {/* <a className = "dropdown-menu1" href = "#">Log out</a> */}
-                                        <Link to="/myarticle"><Button id="my-article" type='primary' className="dropdown-manu">My article</Button></Link>
-                                        <Button id='logout' type="primary" className="dropdown-menu1" onClick={this.props.logOut}>Log out</Button>
-                                    </div>
-                                </button>
-                            </div>
-                    </h2>  
-                    </div>
+                   
                     <div>
-                    <p className="my-article">My Article</p>
-                    
-                    <div>
-                    
                     <div style={{textAlign: 'left', marginLeft: '250px', marginRight: '250px', marginTop: '100px'}}>
                         <div style={{color: '#000000',fontFamily: 'Lucida Std' , display: 'inline-block'}}>
-                            <span className="article-author">{this.props.myArticle.article.author}</span>
-                            <h2 className="article-title">{this.props.myArticle.article.title}</h2>
-                            <span className="article-description">Description will be here</span><br/>
-                            <span className="article-time">{this.props.myArticle.article.time}</span><br/>
-                            <button 
+                            <Link to={`/articles/${this.props.myArticle.article.id}` }>
+                            <span className="article-author">{this.props.myArticle.article.author}</span><br/>
+                            <h2 className="article-title">{this.props.myArticle.article.title}</h2><br/>
+                            <span className="article-description">{this.props.myArticle.article.description}</span><br/>
+                            <span className="article-time">{this.props.myArticle.article.time}min</span><br/>
+                            </Link>
+                            <button style={{marginTop: '20px'}}
                             onClick={this.delMyArticle}
                             >Delete</button>   
                         </div>
                         <div className="img-container" style={{float: 'right', display: 'inline-block'}}>
-                            <img className="article-img" style={{width: '200px'}} src={hodu}/>
-                            
+                            <img className="article-img" style={{width: '250px', height: '150px'}} src={this.props.myArticle.article.image}/> 
                         </div>
                     </div>
-                        
-                  
-                    </div>
-                    
-
-            </div>
+                    </div>   
                 </div>
+               
         )
     }
 }

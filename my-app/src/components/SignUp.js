@@ -38,7 +38,7 @@ function SignUp(props) {
         })
     }
         return (
-            <div style={{justifyContent: 'center'}}>
+            <div style={{justifyContent: 'center', paddingTop: '230px'}}>
                 <h1 style={{fontFamily: 'Lucida Std'}}>Commute Better</h1>
                 <h3 style={{fontFamily: 'Lucida Std', color: '#00d563', marginRight: '280px'}}>Create Account</h3>
                 <form onSubmit={handleSubmit} style={{display:'block'}}>

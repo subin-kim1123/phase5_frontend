@@ -1,7 +1,7 @@
 import React, { Component, useRef } from 'react'
 import Button from '@material-ui/core/Button'
 import Dot from './icon/dot.png'
-import Map1 from './icon/map.png'
+import Map1 from './icon/map1.png'
 import Circle from './icon/circle.png'
 import Profile from './icon/profile.png'
 import './style.css'
@@ -9,26 +9,27 @@ import GoogleMapReact from 'google-map-react';
 import Popup from 'reactjs-popup';
 import Geocode from "react-geocode";
 import fetch from 'node-fetch';
-
+import subway from './icon/subway.png'
 
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 const defaultProps = {
     center: {
-      lat: 47.444,
-      lng: -122.176
+      lat: 41.879194,
+      lng: -87.6564162
     },
-    zoom: 11
+    zoom: 14
   };
 
 
 
 export default class AddressInput extends Component {
     state={
-        startingPoint: 'begin',
-        destination: 'end',
+        startingPoint: '',
+        destination: '',
         profileMenu: '',
-        duration: 0
+        duration: 0,
+        isOpen: false
     }
 
     handleClick = (menu) => {
@@ -45,7 +46,7 @@ export default class AddressInput extends Component {
 
         const google = window.google;
 
-        Geocode.setApiKey("")
+        Geocode.setApiKey("AIzaSyDPT5H99VpEJEJUq2OD0F9QYJ5cqmMreXA")
 
         this.latLngArray.push(new google.maps.LatLng({lat, lng}))
 
@@ -97,6 +98,19 @@ export default class AddressInput extends Component {
         this.props.goToArticle((this.state.duration/60).toFixed(0))
     }
    
+    handleOpen = () => {
+        this.setState({ isOpen: true });
+      }
+      
+    handleClose = () => {
+        // const address = response.results[0].formatted_address;
+        this.latLngArray = []
+        this.setState({ 
+            isOpen: false,
+            startingPoint: '',
+            destination: ''
+         });
+      }
 
     render() {
 
@@ -128,19 +142,23 @@ export default class AddressInput extends Component {
                             style={{display: 'inline-block', color: '#00d563', textAlign: 'center'}}><div>Enter destination</div>
                             <div><img className="dot" src={Dot} alt="Dot"/><img className="map1" src={Map1} alt="Map"/><input className="enterdestination" type ='text' name='destination' id='destination' value={this.state.destination}  placeholder='Destination'/></div>
                             </label>
-                            <Popup trigger={<Button style={{color:'white', backgroundColor: '#1a1617', fontFamily: 'LucidaStd-Bold', textTransform: 'none', width: '100px', marginLeft: '20px'}}>Save</Button>}>
+                            <Popup trigger={<Button style={{color:'white', backgroundColor: '#1a1617', fontFamily: 'LucidaStd-Bold', textTransform: 'none', width: '100px', marginLeft: '20px'}}>Save</Button>}
+                            open={this.state.isOpen}
+                            onOpen={this.handleOpen}>
                             <div className = "popup">
                                 <div className = "popup-inner">
                                     <div className='popup-title'>Starting Point:</div> <div className='popup-text'>{this.state.startingPoint}</div><br/>
                                     <div className='popup-title'>Destination:</div> <div className='popup-text'> {this.state.destination}</div><br/>
-                                    <div className='popup-title'>Time:</div><div className='popup-text'>{(this.state.duration/60).toFixed(0)}min</div><br/>
+                                    <div className='popup-title'>Transit Time:</div><div className='popup-text'>{(this.state.duration/60).toFixed(0)}min</div><br/>
+                                    
                                     <div className="popup-btn">
-                                    <Button>Cancel</Button>
+                                    <Button style={{display: 'inline-block'}} onClick={this.handleClose}>Cancel</Button>
                                     <Button onClick={(e)=>{this.popupClick(e)}}>Confirm</Button>
+                                    {/* <img src={subway} alt="Money" style={{transform: 'translate(150%, -50%)', width: '200px', display: 'flex'}}/> */}
                                     </div>
-
                                 </div>
                             </div>
+                                    
                             </Popup>
                         </div>
                     </form>
@@ -153,7 +171,7 @@ export default class AddressInput extends Component {
                     /> */}
                             <div style={{ height: '100vh', width: '100%' }}>
                                 <GoogleMapReact
-                                    bootstrapURLKeys={{ key: "" }}
+                                    bootstrapURLKeys={{ key: "AIzaSyDPT5H99VpEJEJUq2OD0F9QYJ5cqmMreXA" }}
                                     defaultCenter={defaultProps.center}
                                     defaultZoom={defaultProps.zoom}
                                     onClick={(e) => {this.onClick(e)}}>
