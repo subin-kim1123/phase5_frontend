@@ -11,7 +11,7 @@
 }
 
 .profilebtn {
-    border: none; 
+    border: none;
     background: none
 }
 
@@ -21,39 +21,79 @@
 }
 
 .dot {
-    width: 45px; 
+    width: 45px;
     margin-right: 25px;
 }
 
 .circleimg {
-    width: 15px; 
+    width: 15px;
     margin-right: 12px
+}
+
+.enter-label {
+    text-align: left;
+    padding-left: 27px;
+    padding-bottom: 10px;
 }
 
 .enterlocation {
     padding: 0px 10px;
-    border: 1.5px solid #00d563; 
-    color: #8e8e8e; 
-    border-radius: 4px; 
-    width: 300px; 
+    border: 1.5px solid #00d563;
+    color: #8e8e8e;
+    border-radius: 4px;
+    width: 300px;
     height: 34px;
-    margin-bottom: 30px; 
-    margin-right: 20px; 
+    margin-bottom: 30px;
+    margin-right: 20px;
+}
+
+.enterlocation::placeholder {
+    color: #dadada;
+}
+
+.enterdestination::placeholder {
+    color: #dadada;
 }
 
 .enterdestination {
    padding: 0px 5px;
-   border: 1.5px solid #00d563; 
-   color: #8e8e8e; 
-   border-radius: 4px; 
-   width: 300px; 
-   height: 34px; 
+   border: 1.5px solid #00d563;
+   color: #8e8e8e;
+   border-radius: 4px;
+   width: 300px;
+   height: 34px;
    margin-bottom: 20px;
 }
 
+.toggle-btn:focus {
+    color: #fff; 
+    background-color: #000000;
+    border: 0;
+}
+.toggle-btn:active {
+    color: #fff; 
+    background-color: #000000;
+    border: 0;
+}
+
+
+.toggle-btn {
+    margin-bottom: 50px;
+    padding-top: 5px;
+    width: 90px; 
+    height: 30px; 
+    border-radius: 4px; 
+    border: 0px; 
+    font-family:'LucidaStd';
+    background-color: white;
+    color: #000;
+    border: 1.5px solid #00d563;
+}
+
+
 .map1 {
     width: 20px;
-    align-items: center; 
+    align-items: center;
     margin-right: 12px;
 }
 
@@ -76,11 +116,10 @@
     z-index: 1;
     border-radius: 4px;
     border: 1px solid #00d563;
-    
+
 }
 
 .dropdown-menu {
-
     font-family: 'LucidaStd-Bold';
 }
 
@@ -89,9 +128,13 @@
 }
 
 .dropdown-content a {
-    padding: 12px 16px;
+    /* padding: 12px 16px; */
     text-decoration: none;
     display: block;
+  }
+
+  hr {
+      border: 0.5px solid #00d563;
   }
 
   .dropdown:hover .dropdown-content {
@@ -99,18 +142,20 @@
     right: 0;
     margin-right: 35px;
   }
-  
+
   .header {
-    width: 100%; 
-    height: 170px; 
-    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.1); 
+    width: 100%;
+    height: 170px;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255,);
   }
 
   .categorybtn {
-    border: none; 
+    border: none;
     background: none;
+    margin-left: 30px;
     left: 10%;
+    font-family: 'LucidaStd-Bold';
   }
 
   .category {
@@ -137,6 +182,25 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    z-index :1;
+  }
+
+  .popup1 {
+    position: absolute;
+    padding: 70px;
+    left: 30%;
+    top: 15%;
+    width: 30%;
+    height: 400px;
+    border: 1px solid #011627;
+    border-radius: 1em;
+    box-shadow: -2px 5px 5px #00d563;
+    background-color: #FDFFFC;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    z-index :1;
   }
 
   .popup-inner {
@@ -164,6 +228,13 @@
     left: 0px;
 }
 
+  .popup-subway-image {
+      width: 180px;
+      position: absolute;
+      right: 50px;
+      bottom: 30px;
+  }
+
 .popup-btn {
     padding-top: 100px;
 }
@@ -173,7 +244,7 @@
 }
 html, body, #root, .App {
     width: 100%;
-    height: 100%;  
+    height: 100%;
 }
 
 .home {
@@ -186,11 +257,11 @@ html, body, #root, .App {
 }
 
 .my-article {
-    font-family: 'LucidaStd';
+    font-family: 'LucidaStd-bold';
     font-size: 20px;
     padding-top:8px;
     padding-bottom: 8px;
-   
+
 }
 
 .article-author {
@@ -206,7 +277,11 @@ html, body, #root, .App {
     white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 75ch;
+  max-width: 50;
+}
+
+.dropdown-menu{
+    font-family: 'LucidaStd'
 }
 
 .article-description {
@@ -217,17 +292,40 @@ html, body, #root, .App {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 75ch;
+  margin-bottom: 10px;
 }
 
 .article-time {
     color: #000000;
     text-decoration: none;
     display:inline-block;
+    font-weight: bold;
 }
 
 
-.toggle-btn-checked {
-    color: #fff;
+
+.change-direction {
+   
+        text-decoration: none;
+        display:inline-block;
+        white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 75ch;
+      display: inline-block;  
+      font-family: 'LucidaStd'; 
+      font-size: 12px;
+       bottom: 10px; 
+       margin-left: 1150px;
+       font-family: 'LucidaStd';
+       font-weight: 200;
+       color: #000000;
+       margin-top: 15px;
+       text-decoration: underline;
+    
 }
 
+.article-img{
+    border-radius: 5px;
+}
 

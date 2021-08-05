@@ -6,7 +6,13 @@ import './style.css'
 import { Link } from 'react-router-dom'
 
 export default class MyArticle extends Component {
- 
+    // noArticle = () => {
+    //     if(this.props.myArticle.length=0){
+    //         console.log("there is no article") 
+    //     }else {
+
+    //     }
+    // }
     
     delMyArticle = () => {
         const id = this.props.myArticle.id
@@ -20,6 +26,7 @@ export default class MyArticle extends Component {
       }
 
     render() {
+
         return (
                 <div>
                    
@@ -32,7 +39,7 @@ export default class MyArticle extends Component {
                             <span className="article-description">{this.props.myArticle.article.description}</span><br/>
                             <span className="article-time">{this.props.myArticle.article.time}min</span><br/>
                             </Link>
-                            <button style={{marginTop: '20px'}}
+                            <button style={{marginTop: '20px', border: '1px solid black', borderRadius: '4px', backgroundColor: '#f4f4f4', fontFamily: 'LucidaStd', paddingTop: '8px', paddingBottom: '3px', paddingLeft: '5px', paddingLight: '5px'}}
                             onClick={this.delMyArticle}
                             >Delete</button>   
                         </div>
