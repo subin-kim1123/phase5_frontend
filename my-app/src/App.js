@@ -93,7 +93,8 @@ class App extends Component {
 
   resetIsRead = () => {
     this.setState({
-      congrat: false
+      congrat: false,
+      isRead: []
     })
   }
 

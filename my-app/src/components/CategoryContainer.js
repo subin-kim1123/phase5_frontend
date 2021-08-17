@@ -8,10 +8,10 @@ import tech from './icon/tech.png'
 import sns from './icon/sns.png'
 import Profile from './icon/profile.png'
 import Button from '@material-ui/core/Button'
-import hodu from './icon/hodu.jpg'
 import './style.css'
 import { Link } from 'react-router-dom'
 import Popup from 'reactjs-popup';
+import congrat from './icon/congrat.png'
 
 const moneyId = 1
 const filmId = 2
@@ -93,8 +93,12 @@ export default class CategoryContainer extends Component {
             <div>
             {this.props.congrat?
                 <div className="popup1">
-                <h3 style={{fontFamily: 'LucidaStd-bold'}}>Congratulations!</h3>
-                <Button onClick={this.handleClose}>Confirm</Button>
+                <div style={{alignItems: 'center', marginTop: '-30px'}}>
+                <p style={{fontFamily: 'LucidaStd-bold', fontSize:'25px'}}>Congratulations!</p>
+                <p style={{fontFamily: 'LucidaStd'}}>You use today's commute time productively</p>
+                <img style={{width: '50%', marginBottom: '30px', marginTop: '20px'}} src={congrat}/>
+                <div><Button onClick={this.handleClose}>Close</Button></div>
+                </div>
                 </div>
             :''
             }
@@ -122,7 +126,7 @@ export default class CategoryContainer extends Component {
                     </div>
                     {/* <div>{this.props.congrat=true? <h2>Congrat!!!You read all</h2>: ""}</div> */}
                 </div>
-                <div>
+                <div style={{paddingBottom: '100px'}}>
                     {this.state.category!=null ? this.state.category.articles.map(article => (
                         <div style={{textAlign: 'left', marginLeft: '250px', marginRight: '250px', marginTop: '100px'}}>
                             <div onClick={() => this.readArticle(article.id)} style={{color: '#000000',fontFamily: 'Lucida Std' , display: 'inline-block'}}>

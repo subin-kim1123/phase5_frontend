@@ -203,7 +203,7 @@ constructor(props) {
                     <Autocomplete
                       ref={this.startPointInput}
                       className="enterlocation"
-                      apiKey=''
+                      apiKey='AIzaSyDPT5H99VpEJEJUq2OD0F9QYJ5cqmMreXA'
                       options={{
 
                           types: 'regions'
@@ -225,7 +225,7 @@ constructor(props) {
                     <Autocomplete
                       ref={this.endPointInput}
                       className="enterdestination"
-                      apiKey=''
+                      apiKey='AIzaSyDPT5H99VpEJEJUq2OD0F9QYJ5cqmMreXA'
                       placeholder='End'
                       options={{
 
@@ -278,7 +278,7 @@ constructor(props) {
           <div>
             <div style={{height: '100vh', width: '100%'}}>
               <GoogleMapReact
-                bootstrapURLKeys={{key: ""}}
+                bootstrapURLKeys={{key: "AIzaSyDPT5H99VpEJEJUq2OD0F9QYJ5cqmMreXA"}}
                 center={this.state.mapOptions.center}
                 zoom={this.state.mapOptions.zoom}
                 onClick={(e) => {

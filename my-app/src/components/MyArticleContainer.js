@@ -23,13 +23,13 @@ export default class MyArticleContainer extends Component {
                                     <div className = "dropdown-content">
                                         
                                         {/* <a className = "dropdown-menu1" href = "#">Log out</a> */}
-                                        <Link to="/myarticle"><Button id="my-article" type='primary' style={{fontFamily: 'LucidaStd-bold', marginTop: '7px'}} className="dropdown-menu">My article</Button></Link><hr/>
+                                        <Link to="/myarticle"><Button id="my-article" type='primary' style={{fontFamily: 'LucidaStd-bold', marginTop: '7px'}} className="dropdown-menu">Your Lists</Button></Link><hr/>
                                         <Button id='logout' type="primary" className="dropdown-menu1" style={{fontFamily: 'LucidaStd-bold', marginBottom: '7px'}} onClick={this.props.logOut}>Log out</Button>
                                     </div>
                                 </button>
                             </div>
                     </h2>  
-                    <p className="my-article">My Article</p>
+                    <p className="my-article">Your Lists</p>
                     
                     {arrOfMyarticles}
         </div>
