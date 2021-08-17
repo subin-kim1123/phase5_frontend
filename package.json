@@ -1,8 +1,12 @@
 {
   "start": "my-app",
   "name": "my-app",
-  "version": "15.10.0",
+  "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=15.10.0",
+    "npm": ">=7.5.3"
+  },
   "dependencies": {
     "@material-ui/core": "^4.12.2",
     "@react-google-maps/api": "^2.2.0",
