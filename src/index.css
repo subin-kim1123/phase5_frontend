@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* #header.dropdown.profileimage {
+  width:'35px';
+  align-items: center;
+  margin-left: '1300px';
+  margin-right: '12px';
+  display: inline-block; 
+} */
+
+/* .profile.dropdown.profilebtn {
+  border: none;
+  background: none;
+} */
