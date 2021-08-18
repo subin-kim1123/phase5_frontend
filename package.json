@@ -1,5 +1,5 @@
 {
-  "start": "my-app",
+  "start": "node index.js", 
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
