@@ -1,5 +1,5 @@
 {
-  "start": "node index.js", 
+  "start": "node index.js",
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
@@ -18,16 +18,16 @@
     "google-maps-react": "^2.0.6",
     "got": "^6.7.1",
     "lottie-ios": "^3.2.3",
-    "node-fetch": "^1.7.3",
+    "node-fetch": "^2.6.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-geocode": "^0.2.3",
     "react-google-autocomplete": "^2.4.0",
-    "react-google-maps": "^7.3.0",
+    "react-google-maps": "^9.4.5",
     "react-google-places-autocomplete": "^3.3.2-alpha.0",
     "react-native-google-places-autocomplete": "^2.3.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^1.1.5",
+    "react-scripts": "^4.0.3",
     "reactjs-popup": "^2.0.5",
     "web-vitals": "^1.1.2"
   },
@@ -57,7 +57,6 @@
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
-  "devDependencies": {},
   "author": "",
   "license": "ISC"
 }
