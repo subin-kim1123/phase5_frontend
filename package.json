@@ -13,10 +13,12 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
     "chokidar": "^3.5.2",
     "google-map-react": "^2.1.10",
     "google-maps-react": "^2.0.6",
     "got": "^6.7.1",
+    "http-proxy-middleware": "^2.0.1",
     "lottie-ios": "^3.2.3",
     "node-fetch": "^2.6.1",
     "react": "^17.0.2",
@@ -58,5 +60,8 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "netlify-cli": "^6.7.4"
+  }
 }

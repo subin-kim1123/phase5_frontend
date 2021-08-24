@@ -9,6 +9,7 @@ import ArticleContainer from './components/ArticleContainer';
 import MyArticleContainer from './components/MyArticleContainer';
 import CategoryContainer from './components/CategoryContainer';
 import Home from './components/Home';
+import axios from 'axios'
 
 class App extends Component {
 
