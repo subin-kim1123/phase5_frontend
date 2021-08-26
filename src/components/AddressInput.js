@@ -58,9 +58,7 @@ export default class AddressInput extends Component {
   }
 
   onMapClick = ({x, y, lat, lng, event}) => {
-
     Geocode.setApiKey(API_KEY)
-
     this.latLngArray.push(new google.maps.LatLng({lat, lng}))
 
     if (this.latLngArray.length == 1) {
