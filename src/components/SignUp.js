@@ -18,8 +18,7 @@ function SignUp(props) {
             ...formData,
             [event.target.name]: event.target.value
         })
-    } 
-
+    }
     const handleSubmit = (event) => {
         event.preventDefault()
         const {username, password} = formData
